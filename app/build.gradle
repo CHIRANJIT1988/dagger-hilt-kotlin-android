@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.dagger.hilt"
+        minSdk 28
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    // region default
+    implementation "androidx.core:core-ktx:$rootProject.ktxCoreVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.junit4Version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCoreVersion"
+
+    // region Retrofit
+    api "com.squareup.retrofit2:retrofit:$rootProject.gsonConverterVersion"
+    api "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okHttpVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$rootProject.okHttpVersion"
+    api "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    // region GSON
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.gsonConverterVersion"
+
+    // region Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    // region KTX && Kotlin Extensions
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifeCycleScopeVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifeCycleExtensions"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.viewModelScopeVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.liveDataVersion"
+
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentKtxVersion"
+
+    // region dagger hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.daggerHiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.daggerHiltVersion"
+
+    // region Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+}
